@@ -7,4 +7,7 @@ public class DefaultMessageDeserializer implements MessageDeserializer {
   public String deserializeMessage(ByteBuffer buffer) {
     return ByteUtils.readString(buffer);
   }
+
+  @Override
+  public String getSchema() {return null; }
 }

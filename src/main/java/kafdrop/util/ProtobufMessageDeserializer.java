@@ -84,4 +84,8 @@ public class ProtobufMessageDeserializer implements MessageDeserializer {
     }
   }
 
+  @Override
+  public String getSchema(){
+    return null;
+  }
 }

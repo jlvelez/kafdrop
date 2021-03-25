@@ -6,6 +6,8 @@ import io.confluent.kafka.schemaregistry.client.SchemaRegistryClient;
 import io.confluent.kafka.schemaregistry.client.rest.RestService;
 import io.confluent.kafka.serializers.*;
 import kafdrop.config.KafkaConfigurationException;
+import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +22,7 @@ import java.util.*;
 public final class AvroMessageDeserializer implements MessageDeserializer {
   private final String topicName;
   private final KafkaAvroDeserializer deserializer;
+  private Schema schema;
 
   private static final Logger LOG = LoggerFactory.getLogger(AvroMessageDeserializer.class);
 
@@ -36,7 +39,15 @@ public final class AvroMessageDeserializer implements MessageDeserializer {
   public String deserializeMessage(ByteBuffer buffer) {
     // Convert byte buffer to byte array
     final var bytes = ByteUtils.convertToByteArray(buffer);
-    return deserializer.deserialize(topicName, bytes).toString();
+    GenericRecord record = (GenericRecord) deserializer.deserialize(topicName, bytes);
+    schema = record.getSchema();
+    //return deserializer.deserialize(topicName, bytes).toString();
+    return record.toString();
+  }
+
+  @Override
+  public String getSchema(){
+    return schema.toString();
   }
 
   private static KafkaAvroDeserializer getDeserializer(

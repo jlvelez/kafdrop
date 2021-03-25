@@ -28,6 +28,7 @@ public final class MessageVO {
   private String key;
   private Map<String, String> headers;
   private Date timestamp;
+  private String schema;
 
   public int getPartition() { return partition; }
   public void setPartition(int partition) { this.partition = partition; }
@@ -76,4 +77,8 @@ public final class MessageVO {
   public void setTimestamp(Date timestamp) {
     this.timestamp = timestamp;
   }
+
+  public void setSchema(String schema) { this.schema = schema; }
+
+  public String getSchema() { return this.schema; }
 }

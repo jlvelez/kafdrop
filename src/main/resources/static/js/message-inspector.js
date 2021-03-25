@@ -17,6 +17,11 @@
  */
 
 jQuery(document).ready(function () {
+    jQuery(document).ready(function (){
+        $('.schema-body').hide();
+        $('.schema-body').data('hidden', true);
+    });
+
     jQuery(document).on('click', '.toggle-msg', function (e) {
         var link = jQuery(this),
             linkIcon = link.find('.fa'),
@@ -31,6 +36,25 @@ jQuery(document).ready(function () {
         } else {
             body.text(JSON.stringify(JSON.parse(body.text()), null, 3));
             body.data('expanded', true);
+        }
+    });
+
+    jQuery(document).on('click', '.toggle-sch', function (e) {
+        var link = jQuery(this),
+            linkIcon = link.find('.fa'),
+            body = link.parent().find('.schema-body');
+
+        e.preventDefault();
+
+        linkIcon.toggleClass('fa-plus-circle fa-minus-circle');
+        if (true == body.data('hidden')) {
+            body.text(JSON.stringify(JSON.parse(body.text()), null, 3));
+            body.data('hidden', false);
+            body.show();
+        } else {
+            body.text(JSON.stringify(JSON.parse(body.text())));
+            body.data('hidden', true);
+            body.hide();
         }
     });
 

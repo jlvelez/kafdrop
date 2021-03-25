@@ -152,8 +152,10 @@ public final class KafkaMonitorImpl implements KafkaMonitor {
         messageVo.setMessage(record.value());
         messageVo.setHeaders(headersToMap(record.headers()));
         messageVo.setTimestamp(new Date(record.timestamp()));
+        messageVo.setSchema(deserializers.getValueDeserializer().getSchema());
         messageVos.add(messageVo);
       }
+      LOG.info("Schema info {}.",deserializers.getValueDeserializer().getSchema());
       return messageVos;
     } else {
       return Collections.emptyList();
@@ -174,8 +176,10 @@ public final class KafkaMonitorImpl implements KafkaMonitor {
         messageVo.setMessage(record.value());
         messageVo.setHeaders(headersToMap(record.headers()));
         messageVo.setTimestamp(new Date(record.timestamp()));
+        messageVo.setSchema(deserializers.getValueDeserializer().getSchema());
         messageVos.add(messageVo);
       }
+      LOG.info("Schema info {}.",deserializers.getValueDeserializer().getSchema());
       return messageVos;
     } else {
       return Collections.emptyList();

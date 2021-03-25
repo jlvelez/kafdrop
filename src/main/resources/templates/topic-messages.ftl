@@ -27,6 +27,9 @@
         .toggle-msg {
             float: left;
         }
+        .toggle-sch {
+            float: left;
+        }
     </style>
     <script src="<@spring.url '/js/message-inspector.js'/>"></script>
 </@template.header>
@@ -43,6 +46,11 @@
                 <span class="badge badge-light">Key:</span> ${msg.key!''} &nbsp;
                 <span class="badge badge-light">Timestamp:</span> ${msg.timestamp?string('yyyy-MM-dd HH:mm:ss.SSS')}
                 <span class="badge badge-light">Headers:</span> ${msg.headersFormatted}
+                <div>
+                   <span class="badge badge-light">Schema</span>  &nbsp;
+                   <a href="#" class="toggle-sch"><i class="fa fa-plus-circle">&nbsp;</i></a>
+                   <pre class="schema-body">${msg.schema!''}</pre>
+               </div>
                 <div>
                     <a href="#" class="toggle-msg"><i class="fa fa-chevron-circle-right">&nbsp;</i></a>
                     <pre class="message-body">${msg.message!''}</pre>

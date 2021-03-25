@@ -24,4 +24,9 @@ public class MsgPackMessageDeserializer implements MessageDeserializer {
       throw new DeserializationException(errorMsg);
     }
   }
+
+  @Override
+  public String getSchema(){
+    return null;
+  }
 }
